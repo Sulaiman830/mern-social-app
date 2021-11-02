@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const userRoute = require('./routes/users');
 const authRoute = require('./routes/auth');
+const postRoute = require('./routes/posts');
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.get("/", (req, res) => {
 
 app.use('/api/v1/users', userRoute);
 app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/posts', postRoute);
 
 app.listen(8080, () => {
     console.log(`Server is running on Port: 8080`)
