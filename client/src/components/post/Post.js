@@ -9,6 +9,7 @@ const Post = ({post}) => {
     const {profilePicture, username} = user
     const [likes, setLikes] = useState(like)
     const [isLiked, setIsLiked] = useState(false)
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
     const likeHandler = () => {
         setLikes(isLiked ? likes - 1 : likes + 1) 
