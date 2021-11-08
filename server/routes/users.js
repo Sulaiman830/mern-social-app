@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
+const { findOne } = require('../models/User');
 const User = require('../models/User');
 
 // router.get("/", (req, res) => {
@@ -44,9 +45,15 @@ router.delete("/:id", async (req, res) => {
     }
 })
 //get a user
-router.get("/:id", async (req, res) => {
+// router.get("/:id", async (req, res) => {
+router.get("/", async (req, res) => {
+    const userId = req.query.userId;
+    const username = req.query.username;
     try {
-        const user = await User.findById(req.params.id);
+        const user = userId ? 
+        //  await User.findById(req.params.id):
+        await User.findById(userId):
+         await User.findOne({username:username})
         // res.status(200).json(user);
         // in case we don't need all properties of the user to send to the client
         const {password, createdAt, ...others} = user._doc;

@@ -2,7 +2,7 @@ import "./rightbar.css"
 import Online from "../online/Online"
 import { Users } from "../../dummyData"
 
-const Rightbar = ({ profile }) => {
+const Rightbar = ({ user }) => {
 
     const HomeRightbar = () => {
         return (
@@ -34,15 +34,20 @@ const Rightbar = ({ profile }) => {
                 <div className="user-info">
                     <div className="user-info-item">
                         <span className="user-info-key">City:</span>
-                        <span className="user-info-value">New York</span>
+                        <span className="user-info-value">{user.city}</span>
                     </div>
                     <div className="user-info-item">
                         <span className="user-info-key">From:</span>
-                        <span className="user-info-value">Madrid</span>
+                        <span className="user-info-value">{user.from}</span>
                     </div>
                     <div className="user-info-item">
                         <span className="user-info-key">Relationship:</span>
-                        <span className="user-info-value">Married</span>
+                        <span className="user-info-value">
+                            {user.relationship === 1 ? "Single" : 
+                            user.relationship === 2 ? "Married" : 
+                            "Not Available"
+                            }
+                            </span>
                     </div>
                 </div>
                 <h4 className="title">User Friends</h4>
@@ -73,7 +78,7 @@ const Rightbar = ({ profile }) => {
     return (
         <div className="rightbar">
             <div className="rightbar-wrapper">
-                {profile ? <ProfileRightbar/> : <HomeRightbar/>}
+                {user ? <ProfileRightbar/> : <HomeRightbar/>}
             </div>
         </div>
     )
