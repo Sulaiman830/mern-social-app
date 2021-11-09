@@ -1,14 +1,20 @@
-import {useRef} from 'react'
+import {useRef, useContext} from 'react'
 import "./login.css"
+import { loginCall } from '../../apiCalls'
+import { AuthContext } from '../../context/AuthContext'
+import { CircularProgress } from '@mui/material'
+import { useNavigate } from 'react-router'
 
 const Login = () => {
     const email = useRef()
     const password = useRef()
-
+    const {user, isFetching, error, dispatch} = useContext(AuthContext)
+    const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('submitted')
+        loginCall({email: email.current.value, password: password.current.value}, dispatch, () => navigate("/"))
     }
+    console.log('userCont', user)
     return (
         <div className="login">
             <div className="login-wrapper">
@@ -35,7 +41,11 @@ const Login = () => {
                             required 
                             minLength="6"
                         />
-                        <button className="login-btn">Log In</button>
+                        <button className="login-btn" disabled={isFetching}>
+                            {isFetching? 
+                            <CircularProgress color="inherit" size={30}/> 
+                            : "Log In"}
+                            </button>
                         <span className="login-forgot">Forgot Password?</span>
                         <button className="signup-btn">Create a new account</button>
                     </form>

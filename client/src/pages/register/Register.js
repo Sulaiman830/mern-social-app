@@ -1,6 +1,8 @@
 import "./register.css"
+import {useNavigate} from "react-router-dom"
 
 const Register = () => {
+    const navigate = useNavigate()
     return (
         <div className="login">
             <div className="login-wrapper">
@@ -17,7 +19,9 @@ const Register = () => {
                         <input placeholder="Enter password" type="password" className="login-input" />
                         <input placeholder="Confirm password" type="password" className="login-input" />
                         <button className="login-btn">Sign Up</button>
-                        <button className="signup-btn">Login</button>
+                        {/* <Link to="/login"> */}
+                        <button className="signup-btn" onClick={() => navigate("/login")}>Login</button>
+                        {/* </Link> */}
                     </div>
                 </div>
             </div>
