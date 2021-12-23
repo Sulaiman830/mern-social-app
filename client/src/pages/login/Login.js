@@ -19,9 +19,9 @@ const Login = () => {
         <div className="login">
             <div className="login-wrapper">
                 <div className="login-left">
-                    <h3 className="login-logo">Shinsocial</h3>
+                    <h3 className="login-logo">Social App</h3>
                     <span className="login-desc">
-                        Connect with friends and the world around you on shinsocial.
+                        Connect with friends and the world around you on social app.
                     </span>
                 </div>
                 <div className="login-right">
