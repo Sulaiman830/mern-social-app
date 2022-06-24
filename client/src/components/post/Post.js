@@ -1,10 +1,11 @@
-import {useState, useEffect} from "react"
+import {useState, useEffect, useContext} from "react"
 import "./post.css"
 import {MoreVert} from "@mui/icons-material"
 // import {Users} from "../../dummyData"
 import axios from 'axios'
 import {format} from 'timeago.js'
 import {Link} from "react-router-dom"
+import { AuthContext } from "../../context/AuthContext"
 
 const Post = ({post}) => {
     console.log("post", post)
@@ -15,8 +16,19 @@ const Post = ({post}) => {
     const [isLiked, setIsLiked] = useState(false)
     const [user, setUser] = useState({})
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+    const {user: currentUser} = useContext(AuthContext)
 
+    useEffect(() => {
+        setIsLiked(post.likes.includes(currentUser._id))
+    }, [currentUser._id, post.likes])
+    
     const likeHandler = () => {
+        // not completed yet
+        try {
+            axios.put("/posts/"+ post._id+"/like", {userId: currentUser._id})
+        } catch(err) {
+            console.log('error', err)
+        }
         setTotalLikes(isLiked ? totalLikes - 1 : totalLikes + 1) 
         setIsLiked(!isLiked)
     }
@@ -35,7 +47,7 @@ const Post = ({post}) => {
                 <div className="post-top">
                     <div className="post-top-left">
                         <Link to={`/profile/${user.username}`}>
-                        <img src={user.profilePicture || PF+"/person/no-avatar.png"} alt="" className="post-profile-img" />
+                        <img src={user.profilePicture ? PF + user.profilePicture : PF+"/person/no-avatar.png"} alt="" className="post-profile-img" />
                         </Link>
                         <span className="post-user-name">{user.username}</span>
                         <span className="post-date">{format(createdAt)}</span>
