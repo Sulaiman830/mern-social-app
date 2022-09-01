@@ -12,24 +12,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link href="https://mui.com/" sx={{ color: "#4158d0" }}>
-        Freewyre
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import Copyright from "../../components/copyright/copyright";
 
 const theme = createTheme();
 
@@ -48,147 +31,146 @@ export default function Login() {
       <Grid
         container
         component="main"
-        sx={{
-          height: "100vh",
-          background: "linear-gradient(-135deg,#c850c0,#4158d0)",
-        }}
+        sx={{ height: "100vh", justifyContent: "center", alignItems: "center" }}
       >
         <CssBaseline />
-        <Grid
-        // sx={{ justifyContent: "center", alignItems: "center" }}
-        />
-        <Grid
-          item
-          sm={8}
-          sx={{ background: "white", margin: "auto", borderRadius: 5 }}
+        <Box
+          sx={{
+            my: 8,
+            mx: 4,
+            display: "flex",
+            flexDirection: "row",
+            width: "60%",
+          }}
         >
-          <Box
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={12}
+            component={Paper}
+            elevation={6}
+            square
             sx={{
-              my: 12,
-              mx: 6,
+              background: "#c3c3c3",
               display: "flex",
-              flexDirection: "row",
+              justifyContent: "center",
               alignItems: "center",
+              borderTopLeftRadius: "12px",
+              borderBottomLeftRadius: "12px",
             }}
           >
-            <Grid item xs={false} sm={12} md={7}>
-              <Box
-                sx={{
-                  width: 400,
-                  height: 450,
-                  borderRadius: 3,
-                  border: "2px solid #4158d0",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "column",
-                  // backgroundColor: "#c850c0",
-                  "&:hover": {
-                    backgroundColor: "primary.main",
-                    opacity: [0.9, 0.8, 0.7],
-                  },
-                }}
+            <Box>
+              <Typography component="h4" variant="h4">
+                Welcome back to
+              </Typography>
+              <Typography
+                component="h1"
+                variant="h1"
+                sx={{ textDecoration: "underline", fontWeight: "400" }}
               >
-                <Typography
-                  component="h2"
-                  variant="h3"
-                  sx={{
-                    color: "#4158d0",
-                  }}
-                >
-                  Freewyre
-                </Typography>
-                <Typography
-                  component="h5"
-                  variant="h5"
-                  sx={{
-                    color: "#4158d0",
-                  }}
-                >
-                  Connect Freely, accross the globe
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid
-              item
-              md={8}
-              // component={Paper}
-              elevation={6}
-              square
+                Freewyre!
+              </Typography>
+              <Typography
+                component="h6"
+                variant="h6"
+                sx={{ maxWidth: "385px" }}
+              >
+                Connect with friends and the world around you on freewyre.
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={12}
+            component={Paper}
+            elevation={6}
+            square
+            sx={{
+              borderTopRightRadius: "12px",
+              borderBottomRightRadius: "12px",
+            }}
+          >
+            <Box
+              sx={{
+                my: 8,
+                mx: 4,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
             >
+              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                Sign in
+              </Typography>
               <Box
-                sx={{
-                  my: 8,
-                  mx: 4,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
+                component="form"
+                noValidate
+                onSubmit={handleSubmit}
+                sx={{ mt: 1 }}
               >
-                <Avatar sx={{ m: 1, bgcolor: "#c850c0" }}>
-                  <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                  Sign in
-                </Typography>
-                <Box
-                  component="form"
-                  noValidate
-                  onSubmit={handleSubmit}
-                  sx={{ mt: 1 }}
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                  inputProps={{ sx: { paddingY: "10px" } }}
+                  InputLabelProps={{
+                    sx: { lineHeight: ".9em" },
+                  }}
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  inputProps={{ sx: { paddingY: "10px" } }}
+                  InputLabelProps={{
+                    sx: { lineHeight: ".9em" },
+                  }}
+                />
+                <FormControlLabel
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Remember me"
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
                 >
-                  <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                    autoFocus
-                  />
-                  <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox value="remember" sx={{ color: "#4158d0" }} />
-                    }
-                    label="Remember me"
-                  />
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2, background: "#4158d0" }}
-                  >
-                    Sign In
-                  </Button>
-                  <Grid container>
-                    <Grid item xs>
-                      <Link href="#" variant="body2" sx={{ color: "#4158d0" }}>
-                        Forgot password?
-                      </Link>
-                    </Grid>
-                    <Grid item>
-                      <Link href="#" variant="body2" sx={{ color: "#4158d0" }}>
-                        {"Don't have an account? Sign Up"}
-                      </Link>
-                    </Grid>
+                  Sign In
+                </Button>
+                <Grid container>
+                  <Grid item xs>
+                    <Link href="#" variant="body2">
+                      Forgot password?
+                    </Link>
                   </Grid>
-                  <Copyright sx={{ mt: 5 }} />
-                </Box>
+                  <Grid item>
+                    <Link href="#" variant="body2">
+                      {"Don't have an account? Sign Up"}
+                    </Link>
+                  </Grid>
+                </Grid>
+                <Copyright sx={{ mt: 5 }} />
               </Box>
-            </Grid>
-          </Box>
-        </Grid>
+            </Box>
+          </Grid>
+        </Box>
       </Grid>
     </ThemeProvider>
   );
