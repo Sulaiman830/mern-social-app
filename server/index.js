@@ -41,13 +41,13 @@ const storage = multer.diskStorage({
     cb(null, "public/images");
   },
   filename: (req, file, cb) => {
-    cb(null, req.body.name);
+    cb(null, file.originalname);
   },
 });
-const upload = multer();
+const upload = multer({ storage });
 
 app.post(
-  "api/upload",
+  "/api/v1/upload",
   upload.single("file"),
   (req, res) => {
     try {
