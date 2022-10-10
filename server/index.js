@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const morgan = require("morgan");
 const helmet = require("helmet");
 const multer = require("multer");
+const path = require("path");
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
@@ -31,6 +32,10 @@ db.once("open", function (err, resp) {
   console.log("MongoDB Connected successfully.");
 });
 
+app.use(
+  "/assets",
+  express.static(path.join(__dirname, "public/assets"))
+);
 //middleware
 app.use(express.json());
 app.use(helmet());
@@ -44,7 +49,7 @@ const storage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
-const upload = multer({ storage });
+const upload = multer({ storage: storage });
 
 app.post(
   "/api/v1/upload",
